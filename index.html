@@ -7,7 +7,6 @@
 <style>
     :root {
         --gold: #f5d6a4;
-        --bg-dark: #050714;
         --accent-rose: #c97986;
     }
 
@@ -34,7 +33,6 @@
         padding: 24px;
     }
 
-    /* Lichtaura hinter der Karte */
     .scene::before {
         content: "";
         position: absolute;
@@ -73,7 +71,6 @@
         transform: rotateY(180deg);
     }
 
-    /* atmender Glow */
     .card.breathing {
         animation: breathing 6s ease-in-out infinite;
     }
@@ -96,10 +93,6 @@
         }
     }
 
-    .card:hover {
-        transform: translateY(-8px) scale(1.02) rotateX(4deg) rotateY(-2deg);
-    }
-
     .side {
         position: absolute;
         inset: 0;
@@ -110,20 +103,17 @@
         padding: 26px 26px 22px;
     }
 
-    /* Vorderseite */
     .front {
         background: radial-gradient(circle at top, #3a426d 0, #181b2f 45%, #050714 100%);
         position: relative;
     }
 
-    /* Rückseite */
     .back {
         background: radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
         transform: rotateY(180deg);
         position: relative;
     }
 
-    /* goldener Rahmen */
     .side::before {
         content: "";
         position: absolute;
@@ -136,7 +126,6 @@
         pointer-events: none;
     }
 
-    /* Glanz-Schimmer */
     .card::before {
         content: "";
         position: absolute;
@@ -176,7 +165,6 @@
         }
     }
 
-    /* kleine Sparkles */
     .sparkles {
         position: absolute;
         inset: 0;
@@ -207,13 +195,18 @@
         100% { opacity: 0; }
     }
 
-    /* Logo-Zeile */
+    /* Logo oben links */
+    .front-header {
+        position: relative;
+        margin-top: 8px;
+        margin-bottom: 10px;
+    }
+
     .logo-row {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         gap: 10px;
-        justify-content: center;
-        margin-bottom: 10px;
+        justify-content: flex-start;
     }
 
     .logo-mark {
@@ -254,14 +247,6 @@
         margin-top: 2px;
     }
 
-    /* Inhalt Vorderseite */
-    .front-header {
-        position: relative;
-        text-align: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
     .pill {
         display: inline-flex;
         align-items: center;
@@ -279,7 +264,7 @@
             rgba(245,214,164,0.06),
             rgba(0,0,0,0.7)
         );
-        margin-top: 10px;
+        margin-top: 14px;
     }
 
     .pill span.heart {
@@ -287,21 +272,18 @@
         color: var(--accent-rose);
     }
 
-    .front-title {
+    .title-block {
         margin-top: 10px;
+    }
+
+    .front-title {
         font-size: 1.4rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
     }
 
-    .front-subtitle {
-        margin-top: 2px;
-        font-size: 0.9rem;
-        color: rgba(245, 214, 164, 0.9);
-    }
-
     .divider {
-        margin: 16px auto 16px;
+        margin: 18px auto 16px;
         width: 70%;
         height: 1px;
         background: linear-gradient(
@@ -336,33 +318,16 @@
         gap: 10px;
     }
 
-    .front-place {
-        font-size: 0.8rem;
+    .front-line-big {
+        font-size: 0.86rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: rgba(245,214,164,0.78);
+        color: rgba(245,214,164,0.9);
     }
 
-    .front-restaurant {
-        font-size: 1.3rem;
-        letter-spacing: 0.28em;
-        text-indent: 0.28em;
-        text-transform: uppercase;
-        color: rgba(245, 214, 164, 0.98);
-    }
-
-    .front-line {
+    .front-line-small {
         font-size: 0.82rem;
-        color: rgba(245,214,164,0.8);
-        margin-top: 4px;
-    }
-
-    .front-tagline {
-        margin-top: 10px;
-        font-size: 0.76rem;
-        color: rgba(245,214,164,0.75);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        color: rgba(245,214,164,0.85);
     }
 
     .front-footer {
@@ -387,9 +352,8 @@
         color: rgba(245,214,164,0.75);
     }
 
-    /* Inhalt Rückseite */
+    /* Rückseite Inhalt */
     .back-header {
-        text-align: center;
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -450,11 +414,6 @@
         .front-title {
             font-size: 1.25rem;
         }
-
-        .front-restaurant {
-            font-size: 1.2rem;
-            letter-spacing: 0.26em;
-        }
     }
 </style>
 </head>
@@ -487,17 +446,21 @@
                         <span class="heart">♥</span>
                         <span>Gutschein</span>
                     </div>
-                    <div class="front-title">Date Night</div>
-                    <div class="front-subtitle">für Julia</div>
+
+                    <div class="title-block">
+                        <div class="front-title">Date Night</div>
+                    </div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="front-main">
-                    <div class="front-place">Restaurant Zeitlang</div>
-                    <div class="front-restaurant">Bergson</div>
-                    <div class="front-line">Ein Abendessen im Kunstkraftwerk in Aubing.</div>
-                    <div class="front-tagline">Nur wir zwei · heute Abend</div>
+                    <div class="front-line-big">
+                        HEUTE ABEND GIBT ES NUR UNS ZWEI
+                    </div>
+                    <div class="front-line-small">
+                        Ein Abendessen im RESTAURANT ZEITLANG.
+                    </div>
                 </div>
 
                 <div class="front-footer">
@@ -527,7 +490,7 @@
                             <div class="logo-text-sub">kunstkraftwerk</div>
                         </div>
                     </div>
-                    <div style="margin-top: 10px; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;">
+                    <div style="margin-top: 14px; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; text-align:center;">
                         Date Night im Zeitlang
                     </div>
                 </div>
@@ -564,15 +527,18 @@
 <div class="hint">Zum Umdrehen tippen</div>
 
 <script>
-    const card = document.getElementById("card");
+    document.addEventListener("DOMContentLoaded", function () {
+        const card = document.getElementById("card");
 
-    card.addEventListener("click", function () {
-        card.classList.toggle("is-flipped");
+        if (!card) return;
 
-        // Schimmer bei jedem Flip neu starten
-        card.classList.remove("shimmer");
-        void card.offsetWidth;
-        card.classList.add("shimmer");
+        card.addEventListener("click", function () {
+            card.classList.toggle("is-flipped");
+
+            card.classList.remove("shimmer");
+            void card.offsetWidth;
+            card.classList.add("shimmer");
+        });
     });
 </script>
 
