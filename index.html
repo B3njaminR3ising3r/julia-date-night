@@ -8,6 +8,9 @@
     :root {
         --gold: #f5d6a4;
         --accent-rose: #c97986;
+        --bg1: #3a426d;
+        --bg2: #181b2f;
+        --bg3: #050714;
     }
 
     * {
@@ -39,7 +42,7 @@
         inset: 0;
         margin: auto;
         width: 420px;
-        height: 650px;
+        height: 720px;
         background: radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
         filter: blur(18px);
         opacity: 0.9;
@@ -53,44 +56,21 @@
     }
 
     .card {
-        width: 320px;
-        height: 500px;
+        width: 340px;
+        height: 560px;
         position: relative;
         transform-style: preserve-3d;
-        transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 0.8s ease;
         cursor: pointer;
         border-radius: 20px;
         box-shadow:
             0 18px 45px rgba(0, 0, 0, 0.85),
             0 0 35px rgba(245, 214, 164, 0.18);
-        transform-origin: center center;
         overflow: hidden;
     }
 
     .card.is-flipped {
         transform: rotateY(180deg);
-    }
-
-    .card.breathing {
-        animation: breathing 6s ease-in-out infinite;
-    }
-
-    @keyframes breathing {
-        0% {
-            box-shadow:
-                0 18px 45px rgba(0, 0, 0, 0.85),
-                0 0 35px rgba(245, 214, 164, 0.18);
-        }
-        50% {
-            box-shadow:
-                0 20px 55px rgba(0, 0, 0, 0.9),
-                0 0 52px rgba(245, 214, 164, 0.28);
-        }
-        100% {
-            box-shadow:
-                0 18px 45px rgba(0, 0, 0, 0.85),
-                0 0 35px rgba(245, 214, 164, 0.18);
-        }
     }
 
     .side {
@@ -100,11 +80,11 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        padding: 26px 26px 22px;
+        padding: 24px 26px 22px;
     }
 
     .front {
-        background: radial-gradient(circle at top, #3a426d 0, #181b2f 45%, #050714 100%);
+        background: radial-gradient(circle at top, var(--bg1) 0, var(--bg2) 45%, var(--bg3) 100%);
         position: relative;
     }
 
@@ -124,45 +104,6 @@
             0 0 0 1px rgba(255, 255, 255, 0.04),
             0 0 25px rgba(245, 214, 164, 0.15);
         pointer-events: none;
-    }
-
-    .card::before {
-        content: "";
-        position: absolute;
-        inset: -20%;
-        background: linear-gradient(
-            125deg,
-            transparent 0%,
-            transparent 40%,
-            rgba(255, 255, 255, 0.22) 50%,
-            transparent 60%,
-            transparent 100%
-        );
-        opacity: 0;
-        transform: translateX(-80%);
-        pointer-events: none;
-    }
-
-    .card.shimmer::before {
-        animation: shimmer 1.6s ease-out forwards;
-    }
-
-    @keyframes shimmer {
-        0% {
-            opacity: 0;
-            transform: translateX(-80%);
-        }
-        15% {
-            opacity: 0.9;
-        }
-        65% {
-            opacity: 0.2;
-            transform: translateX(80%);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(120%);
-        }
     }
 
     .sparkles {
@@ -198,7 +139,6 @@
     /* Logo oben links */
     .front-header {
         position: relative;
-        margin-top: 8px;
         margin-bottom: 10px;
     }
 
@@ -247,6 +187,11 @@
         margin-top: 2px;
     }
 
+    .pill-wrapper {
+        margin-top: 14px;
+        text-align: center;
+    }
+
     .pill {
         display: inline-flex;
         align-items: center;
@@ -264,7 +209,6 @@
             rgba(245,214,164,0.06),
             rgba(0,0,0,0.7)
         );
-        margin-top: 14px;
     }
 
     .pill span.heart {
@@ -274,6 +218,7 @@
 
     .title-block {
         margin-top: 10px;
+        text-align: center;
     }
 
     .front-title {
@@ -315,7 +260,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 10px;
+        gap: 12px;
     }
 
     .front-line-big {
@@ -358,8 +303,16 @@
         margin-bottom: 10px;
     }
 
+    .back-header-title {
+        margin-top: 14px;
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
     .back-content {
-        margin-top: 12px;
+        margin-top: 14px;
         font-size: 0.82rem;
         line-height: 1.5;
         color: rgba(245,214,164,0.9);
@@ -402,17 +355,13 @@
 
     @media (max-width: 480px) {
         .card {
-            width: 280px;
-            height: 440px;
-        }
-
-        .scene::before {
-            width: 360px;
+            width: 300px;
             height: 540px;
         }
 
-        .front-title {
-            font-size: 1.25rem;
+        .scene::before {
+            width: 340px;
+            height: 640px;
         }
     }
 </style>
@@ -421,7 +370,7 @@
 
 <div class="scene">
     <div class="card-container">
-        <div class="card breathing" id="card">
+        <div class="card" id="card">
 
             <!-- Vorderseite -->
             <div class="side front">
@@ -442,9 +391,11 @@
                         </div>
                     </div>
 
-                    <div class="pill">
-                        <span class="heart">♥</span>
-                        <span>Gutschein</span>
+                    <div class="pill-wrapper">
+                        <div class="pill">
+                            <span class="heart">♥</span>
+                            <span>GUTSCHEIN</span>
+                        </div>
                     </div>
 
                     <div class="title-block">
@@ -490,7 +441,7 @@
                             <div class="logo-text-sub">kunstkraftwerk</div>
                         </div>
                     </div>
-                    <div style="margin-top: 14px; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; text-align:center;">
+                    <div class="back-header-title">
                         Date Night im Zeitlang
                     </div>
                 </div>
@@ -529,15 +480,10 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const card = document.getElementById("card");
-
         if (!card) return;
 
         card.addEventListener("click", function () {
             card.classList.toggle("is-flipped");
-
-            card.classList.remove("shimmer");
-            void card.offsetWidth;
-            card.classList.add("shimmer");
         });
     });
 </script>
