@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date Night</title>
+<title>Date Night mit Julia</title>
 <style>
     :root {
         --gold: #f5d6a4;
@@ -213,12 +213,37 @@
         100% { opacity: 0; }
     }
 
+    /* „Logo“ – stilisierter Kreis mit B */
+    .logo-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(245,214,164,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        letter-spacing: 0.18em;
+        text-indent: 0.18em;
+        color: rgba(245,214,164,0.9);
+        background: radial-gradient(circle at top, rgba(245,214,164,0.18), transparent 70%);
+        box-shadow: 0 0 14px rgba(245,214,164,0.35);
+    }
+
+    .logo-text {
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(245,214,164,0.78);
+        margin-top: 6px;
+    }
+
     /* Inhalt Vorderseite */
     .front-header {
         position: relative;
         text-align: center;
         margin-top: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .pill {
@@ -246,20 +271,20 @@
     }
 
     .front-title {
-        margin-top: 14px;
+        margin-top: 10px;
         font-size: 1.4rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
     }
 
     .front-subtitle {
-        margin-top: 6px;
+        margin-top: 2px;
         font-size: 0.9rem;
         color: rgba(245, 214, 164, 0.9);
     }
 
     .divider {
-        margin: 18px auto 16px;
+        margin: 16px auto 16px;
         width: 70%;
         height: 1px;
         background: linear-gradient(
@@ -348,8 +373,8 @@
     /* Inhalt Rückseite */
     .back-header {
         text-align: center;
-        margin-top: 8px;
-        margin-bottom: 12px;
+        margin-top: 6px;
+        margin-bottom: 10px;
     }
 
     .back-header h2 {
@@ -359,7 +384,7 @@
     }
 
     .back-subline {
-        margin-top: 6px;
+        margin-top: 4px;
         font-size: 0.8rem;
         color: rgba(245,214,164,0.82);
     }
@@ -449,18 +474,24 @@
                 </div>
 
                 <div class="front-header">
-                    <div class="pill">
-                        <span class="heart">♥</span>
-                        <span>Gutschein</span>
+                    <div class="logo-mark">B</div>
+                    <div class="logo-text">Bergson</div>
+
+                    <div style="margin-top: 12px;">
+                        <div class="pill">
+                            <span class="heart">♥</span>
+                            <span>Gutschein</span>
+                        </div>
+                        <div class="front-title">Date Night</div>
+                        <div class="front-subtitle">für Julia</div>
                     </div>
-                    <div class="front-title">Date Night</div>
-                    <div class="front-subtitle">für Julia</div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="front-main">
-                    <div class="front-place">Restaurant Zeitlang · Bergson</div>
+                    <!-- hier KEIN „Bergson“ doppelt, nur unten groß -->
+                    <div class="front-place">Restaurant Zeitlang</div>
                     <div class="front-restaurant">Bergson</div>
                     <div class="front-line">Ein Abendessen im Kunstkraftwerk in Aubing.</div>
                     <div class="front-tagline">Nur wir zwei · heute Abend</div>
@@ -468,8 +499,8 @@
 
                 <div class="front-footer">
                     <div>
-                        Mit Liebe,<br>
-                        <span class="name">Benjamin</span>
+                        In Liebe,<br>
+                        <span class="name">dein Hubby</span>
                     </div>
                     <div class="monogram">B & J</div>
                 </div>
@@ -481,14 +512,17 @@
                     <div class="sparkle"></div>
                     <div class="sparkle"></div>
                     <div class="sparkle"></div>
-                    <div class="sparkle"></div>;
+                    <div class="sparkle"></div>
                     <div class="sparkle"></div>
                 </div>
 
                 <div class="back-header">
+                    <div class="logo-mark">B</div>
+                    <div class="logo-text">Bergson · Zeitlang</div>
+
                     <h2>Date Night im Zeitlang</h2>
                     <div class="back-subline">
-                        Ein Abend im Bergson Kunstkraftwerk nur für uns zwei.
+                        Ein Abend im Bergson Kunstkraftwerk – nur für uns zwei.
                     </div>
                 </div>
 
@@ -501,8 +535,9 @@
 
                     <ul class="back-list">
                         <li>Gehobene Küche im Restaurant Zeitlang im Bergson.</li>
-                        <li>Ein Abend nur für uns zwei, ohne Termine, ohne Alltag.</li>                        
-                        <li>Wir genießen den Abend in Ruhe mit Zeit nur füreinander.</li>
+                        <li>Ein Abend nur für uns zwei – ohne Termine, ohne Alltag.</li>
+                        <li>Ich kümmere mich um Reservierung, Fahrt und alles Organisatorische.</li>
+                        <li>Wir genießen den Abend in Ruhe – mit Zeit nur füreinander.</li>
                     </ul>
 
                     <p>
@@ -511,7 +546,7 @@
                     </p>
 
                     <div class="back-footer">
-                        <em>Ich freu mich auf diesen Abend mit dir.</em>
+                        <em>Ich freu mich auf diesen Abend mit dir. Immer.</em>
                     </div>
                 </div>
             </div>
