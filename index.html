@@ -21,7 +21,6 @@
 
     body {
         min-height: 100vh;
-        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,6 +28,7 @@
         background: radial-gradient(circle at top, #313862 0, #050714 45%, #000 100%);
         color: var(--gold);
         overflow: hidden;
+        margin: 0;
     }
 
     .scene {
@@ -43,7 +43,7 @@
         margin: auto;
         width: 420px;
         height: 760px;
-        background: radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
+        background: radial-gradient(circle, rgba(245,214,164,0.25), transparent 65%);
         filter: blur(20px);
         opacity: 0.9;
         pointer-events: none;
@@ -72,23 +72,22 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        padding: 24px 26px 22px;
+        padding: 24px 26px;
         transition: opacity 0.5s ease;
     }
 
     .front {
-        background: radial-gradient(circle at top, var(--bg1) 0, var(--bg2) 45%, var(--bg3) 100%);
+        background: radial-gradient(circle at top, var(--bg1), var(--bg2) 45%, var(--bg3) 100%);
         opacity: 1;
         pointer-events: auto;
     }
 
     .back {
-        background: radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
+        background: radial-gradient(circle at top, #2a1c33, #140b18 40%, #050714 100%);
         opacity: 0;
         pointer-events: none;
     }
 
-    /* active state für Rückseite */
     .card.show-back .front {
         opacity: 0;
         pointer-events: none;
@@ -104,13 +103,14 @@
         position: absolute;
         inset: 10px;
         border-radius: 16px;
-        border: 1px solid rgba(245, 214, 164, 0.6);
+        border: 1px solid rgba(245,214,164,0.6);
         box-shadow:
-            0 0 0 1px rgba(255, 255, 255, 0.04),
-            0 0 22px rgba(245, 214, 164, 0.15);
+            0 0 0 1px rgba(255,255,255,0.04),
+            0 0 22px rgba(245,214,164,0.15);
         pointer-events: none;
     }
 
+    /* Sparkles */
     .sparkles {
         position: absolute;
         inset: 0;
@@ -122,40 +122,26 @@
         position: absolute;
         width: 3px;
         height: 3px;
+        background: rgba(245,214,164,0.7);
         border-radius: 999px;
-        background: rgba(245, 214, 164, 0.7);
         opacity: 0;
-        animation: twinkle 6s ease-in-out infinite;
+        animation: sparkle 6s ease-in-out infinite;
     }
 
-    .sparkle:nth-child(1) { top: 12%; left: 18%; animation-delay: 0.5s; }
+    .sparkle:nth-child(1) { top: 12%; left: 18%; animation-delay: .5s; }
     .sparkle:nth-child(2) { top: 24%; right: 16%; animation-delay: 1.2s; }
-    .sparkle:nth-child(3) { top: 58%; left: 26%; animation-delay: 2.0s; }
+    .sparkle:nth-child(3) { top: 58%; left: 26%; animation-delay: 2s; }
     .sparkle:nth-child(4) { top: 72%; right: 22%; animation-delay: 3.1s; }
-    .sparkle:nth-child(5) { top: 40%; left: 50%; animation-delay: 4.0s; }
+    .sparkle:nth-child(5) { top: 40%; left: 50%; animation-delay: 4s; }
 
-    @keyframes twinkle {
-        0% { opacity: 0; transform: scale(0.6);}
-        20% { opacity: 1; transform: scale(1);}
-        40% { opacity: 0; transform: scale(0.6);}
+    @keyframes sparkle {
+        0% { opacity: 0; transform: scale(.6); }
+        20% { opacity: 1; transform: scale(1); }
+        40% { opacity: 0; transform: scale(.6); }
         100% { opacity: 0; }
     }
 
-    /* Logo oben links */
-    .front-header,
-    .back-header {
-        position: relative;
-        z-index: 1;
-    }
-
-    .front-header {
-        margin-bottom: 12px;
-    }
-
-    .back-header {
-        margin-bottom: 12px;
-    }
-
+    /* Logo */
     .logo-row {
         display: flex;
         align-items: center;
@@ -169,88 +155,65 @@
         border-radius: 999px;
         border: 1px solid rgba(245,214,164,0.7);
         display: flex;
-        align-items: center;
         justify-content: center;
-        font-size: 0.9rem;
-        letter-spacing: 0.18em;
-        text-indent: 0.18em;
-        color: rgba(245,214,164,0.9);
+        align-items: center;
         background: radial-gradient(circle at top, rgba(245,214,164,0.18), transparent 70%);
+        color: rgba(245,214,164,0.9);
+        font-size: .9rem;
         box-shadow: 0 0 14px rgba(245,214,164,0.35);
     }
 
     .logo-text-block {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
     }
 
     .logo-text-main {
-        font-size: 0.9rem;
-        letter-spacing: 0.32em;
+        letter-spacing: .32em;
         text-transform: uppercase;
-        text-indent: 0.32em;
+        font-size: .9rem;
         color: rgba(245,214,164,0.95);
     }
 
     .logo-text-sub {
-        font-size: 0.62rem;
-        letter-spacing: 0.22em;
+        font-size: .62rem;
         text-transform: lowercase;
         color: rgba(245,214,164,0.75);
-        margin-top: 2px;
+        letter-spacing: .22em;
     }
 
+    /* Vorderseite */
     .pill-wrapper {
-        margin-top: 14px;
         text-align: center;
+        margin-top: 24px;
     }
 
     .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
+        padding: 6px 16px;
         border-radius: 999px;
-        border: 1px solid rgba(245, 214, 164, 0.5);
-        font-size: 0.68rem;
-        letter-spacing: 0.18em;
+        border: 1px solid rgba(245,214,164,0.5);
+        font-size: .78rem;
+        letter-spacing: .15em;
         text-transform: uppercase;
-        color: rgba(245, 214, 164, 0.8);
-        background: linear-gradient(
-            90deg,
-            rgba(0,0,0,0.6),
-            rgba(245,214,164,0.06),
-            rgba(0,0,0,0.7)
-        );
-    }
-
-    .pill span.heart {
-        font-size: 0.8rem;
-        color: var(--accent-rose);
+        background: rgba(0,0,0,0.45);
     }
 
     .title-block {
-        margin-top: 10px;
         text-align: center;
+        margin-top: 16px;
     }
 
     .front-title {
-        font-size: 1.4rem;
-        letter-spacing: 0.08em;
+        font-size: 1.6rem;
+        letter-spacing: .1em;
         text-transform: uppercase;
     }
 
     .divider {
-        margin: 18px auto 16px;
+        margin: 30px auto 24px;
         width: 70%;
         height: 1px;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(245,214,164,0.8),
-            transparent
-        );
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
         position: relative;
     }
 
@@ -260,101 +223,80 @@
         top: -9px;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 0.7rem;
-        color: rgba(245, 214, 164, 0.9);
+        background: #181b2f;
         padding: 0 6px;
-        background: radial-gradient(circle at center, #181b2f 0, #050714 75%);
+        font-size: .8rem;
+        color: var(--gold);
     }
 
     .front-main {
-        position: relative;
-        z-index: 1;
         text-align: center;
-        padding: 4px 6px 0;
+        margin-top: 20px;
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 12px;
+        justify-content: flex-start;
+        gap: 14px;
     }
 
     .front-line-big {
-        font-size: 0.9rem;
-        letter-spacing: 0.12em;
+        font-size: .95rem;
+        letter-spacing: .12em;
         text-transform: uppercase;
         color: rgba(245,214,164,0.95);
     }
 
     .front-line-small {
-        font-size: 0.84rem;
+        font-size: .88rem;
         color: rgba(245,214,164,0.9);
     }
 
     .front-footer {
-        position: relative;
-        z-index: 1;
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
-        margin-top: 18px;
-        font-size: 0.78rem;
-        color: rgba(245,214,164,0.85);
+        margin-top: 20px;
+        font-size: .8rem;
     }
 
-    .front-footer span.name {
-        font-weight: 600;
+    .name {
         color: var(--accent-rose);
+        font-weight: 600;
     }
 
     .monogram {
-        font-size: 0.9rem;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        color: rgba(245,214,164,0.75);
+        opacity: .7;
+        letter-spacing: .2em;
     }
 
-    /* Rückseite Inhalt */
+    /* Rückseite */
     .back-header-title {
-        margin-top: 18px;
-        font-size: 0.9rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
         text-align: center;
+        margin-top: 22px;
+        font-size: .9rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
     }
 
     .back-content {
-        position: relative;
-        z-index: 1;
-        margin-top: 16px;
-        font-size: 0.82rem;
-        line-height: 1.5;
-        color: rgba(245,214,164,0.9);
-        flex: 1;
+        margin-top: 24px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 12px;
+        gap: 14px;
+        font-size: .84rem;
+        line-height: 1.5;
     }
 
-    .back-top-text {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+    .underline {
+        text-decoration: underline;
     }
 
     .back-list {
-        margin-left: 14px;
-        margin-top: 4px;
-    }
-
-    .back-list li {
-        margin-bottom: 4px;
+        margin-left: 16px;
     }
 
     .back-footer {
-        font-size: 0.8rem;
-        color: rgba(245,214,164,0.85);
-        margin-top: 6px;
+        margin-top: 10px;
+        font-size: .82rem;
     }
 
     .back-footer em {
@@ -363,42 +305,29 @@
 
     .hint {
         position: fixed;
-        bottom: 18px;
+        bottom: 20px;
         width: 100%;
         text-align: center;
-        font-size: 0.78rem;
-        color: rgba(245, 214, 164, 0.5);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        pointer-events: none;
+        font-size: .75rem;
+        opacity: .5;
+        letter-spacing: .12em;
     }
 
-    @media (max-width: 480px) {
-        .card {
-            width: 300px;
-            height: 580px;
-        }
-
-        .scene::before {
-            width: 340px;
-            height: 700px;
-        }
-    }
 </style>
 </head>
 <body>
 
 <div class="scene">
     <div class="card-container">
+
         <div class="card" id="card">
 
             <!-- Vorderseite -->
             <div class="side front">
+
                 <div class="sparkles">
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
+                    <div class="sparkle"></div><div class="sparkle"></div>
+                    <div class="sparkle"></div><div class="sparkle"></div>
                     <div class="sparkle"></div>
                 </div>
 
@@ -410,46 +339,36 @@
                             <div class="logo-text-sub">kunstkraftwerk</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="pill-wrapper">
-                        <div class="pill">
-                            <span class="heart">♥</span>
-                            <span>GUTSCHEIN</span>
-                        </div>
-                    </div>
+                <div class="pill-wrapper">
+                    <div class="pill"><span>GUTSCHEIN</span></div>
+                </div>
 
-                    <div class="title-block">
-                        <div class="front-title">Date Night</div>
-                    </div>
+                <div class="title-block">
+                    <div class="front-title">Date Night</div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="front-main">
-                    <div class="front-line-big">
-                        HEUTE ABEND GIBT ES NUR UNS ZWEI
-                    </div>
-                    <div class="front-line-small">
-                        Ein Abendessen im RESTAURANT ZEITLANG.
-                    </div>
+                    <div class="front-line-big">HEUTE ABEND GIBT ES NUR UNS ZWEI</div>
+                    <div class="front-line-small">Ein Abendessen im RESTAURANT ZEITLANG.</div>
                 </div>
 
                 <div class="front-footer">
-                    <div>
-                        In Liebe,<br>
-                        <span class="name">dein Hubby</span>
-                    </div>
+                    <div>In Liebe,<br><span class="name">dein Hubby</span></div>
                     <div class="monogram">B & J</div>
                 </div>
+
             </div>
 
             <!-- Rückseite -->
             <div class="side back">
+
                 <div class="sparkles">
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
-                    <div class="sparkle"></div>
+                    <div class="sparkle"></div><div class="sparkle"></div>
+                    <div class="sparkle"></div><div class="sparkle"></div>
                     <div class="sparkle"></div>
                 </div>
 
@@ -461,53 +380,43 @@
                             <div class="logo-text-sub">kunstkraftwerk</div>
                         </div>
                     </div>
-                    <div class="back-header-title">
-                        Date Night im Zeitlang
-                    </div>
+
+                    <div class="back-header-title">Date Night im Zeitlang</div>
                 </div>
 
                 <div class="back-content">
-                    <div class="back-top-text">
-                        <p>
-                            Dieser Gutschein ist für heute Abend:
-                            Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert,
-                            hole dich zu Hause ab und wir fahren gemeinsam dorthin.
-                        </p>
 
-                        <ul class="back-list">
-                            <li>Gehobene Küche im Restaurant Zeitlang im Bergson.</li>
-                            <li>Ein Abend nur für uns zwei – ohne Termine, ohne Alltag.</li>
-                            <li>Ich kümmere mich um Reservierung, Fahrt und alles Organisatorische.</li>
-                            <li>Wir genießen den Abend in Ruhe – mit Zeit nur füreinander.</li>
-                        </ul>
+                    <p class="underline">Dieser Gutschein ist für heute Abend</p>
 
-                        <p>
-                            Alles, was du tun musst: dich freuen, dich schick machen
-                            und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
-                        </p>
-                    </div>
+                    <p>Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert, hole dich zu Hause ab und wir fahren gemeinsam dorthin.</p>
+
+                    <ul class="back-list">
+                        <li>Ein Abend nur für uns zwei ohne Alltag.</li>
+                        <li>Wir genießen den Abend in Ruhe mit Zeit nur füreinander.</li>
+                    </ul>
+
+                    <p>
+                        Alles, was du tun musst: dich freuen, dich schick machen und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
+                    </p>
 
                     <div class="back-footer">
-                        <em>Ich freu mich auf diesen Abend mit dir. Immer.</em>
+                        <em>Ich freu mich auf diesen Abend mit dir. ♥</em>
                     </div>
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
 </div>
 
 <div class="hint">Zum Umdrehen tippen</div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const card = document.getElementById("card");
-        if (!card) return;
-
-        card.addEventListener("click", function () {
-            card.classList.toggle("show-back");
-        });
-    });
+    const card = document.getElementById("card");
+    card.addEventListener("click", () => card.classList.toggle("show-back"));
 </script>
 
 </body>
