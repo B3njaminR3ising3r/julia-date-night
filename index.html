@@ -42,67 +42,72 @@
         inset: 0;
         margin: auto;
         width: 420px;
-        height: 720px;
+        height: 760px;
         background: radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
-        filter: blur(18px);
+        filter: blur(20px);
         opacity: 0.9;
         pointer-events: none;
     }
 
     .card-container {
         position: relative;
-        perspective: 1300px;
         z-index: 1;
     }
 
     .card {
         width: 340px;
-        height: 560px;
+        height: 600px;
         position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.8s ease;
-        cursor: pointer;
         border-radius: 20px;
         box-shadow:
             0 18px 45px rgba(0, 0, 0, 0.85),
             0 0 35px rgba(245, 214, 164, 0.18);
         overflow: hidden;
-    }
-
-    .card.is-flipped {
-        transform: rotateY(180deg);
+        cursor: pointer;
     }
 
     .side {
         position: absolute;
         inset: 0;
-        backface-visibility: hidden;
         border-radius: 20px;
         display: flex;
         flex-direction: column;
         padding: 24px 26px 22px;
+        transition: opacity 0.5s ease;
     }
 
     .front {
         background: radial-gradient(circle at top, var(--bg1) 0, var(--bg2) 45%, var(--bg3) 100%);
-        position: relative;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .back {
         background: radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
-        transform: rotateY(180deg);
-        position: relative;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* active state für Rückseite */
+    .card.show-back .front {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .card.show-back .back {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .side::before {
         content: "";
         position: absolute;
-        inset: 8px;
+        inset: 10px;
         border-radius: 16px;
         border: 1px solid rgba(245, 214, 164, 0.6);
         box-shadow:
             0 0 0 1px rgba(255, 255, 255, 0.04),
-            0 0 25px rgba(245, 214, 164, 0.15);
+            0 0 22px rgba(245, 214, 164, 0.15);
         pointer-events: none;
     }
 
@@ -137,9 +142,18 @@
     }
 
     /* Logo oben links */
-    .front-header {
+    .front-header,
+    .back-header {
         position: relative;
-        margin-bottom: 10px;
+        z-index: 1;
+    }
+
+    .front-header {
+        margin-bottom: 12px;
+    }
+
+    .back-header {
+        margin-bottom: 12px;
     }
 
     .logo-row {
@@ -254,6 +268,7 @@
 
     .front-main {
         position: relative;
+        z-index: 1;
         text-align: center;
         padding: 4px 6px 0;
         flex: 1;
@@ -264,19 +279,20 @@
     }
 
     .front-line-big {
-        font-size: 0.86rem;
+        font-size: 0.9rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(245,214,164,0.9);
+        color: rgba(245,214,164,0.95);
     }
 
     .front-line-small {
-        font-size: 0.82rem;
-        color: rgba(245,214,164,0.85);
+        font-size: 0.84rem;
+        color: rgba(245,214,164,0.9);
     }
 
     .front-footer {
         position: relative;
+        z-index: 1;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -298,13 +314,8 @@
     }
 
     /* Rückseite Inhalt */
-    .back-header {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
     .back-header-title {
-        margin-top: 14px;
+        margin-top: 18px;
         font-size: 0.9rem;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -312,11 +323,20 @@
     }
 
     .back-content {
-        margin-top: 14px;
+        position: relative;
+        z-index: 1;
+        margin-top: 16px;
         font-size: 0.82rem;
         line-height: 1.5;
         color: rgba(245,214,164,0.9);
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .back-top-text {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -332,9 +352,9 @@
     }
 
     .back-footer {
-        margin-top: 10px;
         font-size: 0.8rem;
         color: rgba(245,214,164,0.85);
+        margin-top: 6px;
     }
 
     .back-footer em {
@@ -356,12 +376,12 @@
     @media (max-width: 480px) {
         .card {
             width: 300px;
-            height: 540px;
+            height: 580px;
         }
 
         .scene::before {
             width: 340px;
-            height: 640px;
+            height: 700px;
         }
     }
 </style>
@@ -447,23 +467,25 @@
                 </div>
 
                 <div class="back-content">
-                    <p>
-                        Dieser Gutschein ist für heute Abend:
-                        Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert,
-                        hole dich zu Hause ab und wir fahren gemeinsam dorthin.
-                    </p>
+                    <div class="back-top-text">
+                        <p>
+                            Dieser Gutschein ist für heute Abend:
+                            Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert,
+                            hole dich zu Hause ab und wir fahren gemeinsam dorthin.
+                        </p>
 
-                    <ul class="back-list">
-                        <li>Gehobene Küche im Restaurant Zeitlang im Bergson.</li>
-                        <li>Ein Abend nur für uns zwei – ohne Termine, ohne Alltag.</li>
-                        <li>Ich kümmere mich um Reservierung, Fahrt und alles Organisatorische.</li>
-                        <li>Wir genießen den Abend in Ruhe – mit Zeit nur füreinander.</li>
-                    </ul>
+                        <ul class="back-list">
+                            <li>Gehobene Küche im Restaurant Zeitlang im Bergson.</li>
+                            <li>Ein Abend nur für uns zwei – ohne Termine, ohne Alltag.</li>
+                            <li>Ich kümmere mich um Reservierung, Fahrt und alles Organisatorische.</li>
+                            <li>Wir genießen den Abend in Ruhe – mit Zeit nur füreinander.</li>
+                        </ul>
 
-                    <p>
-                        Alles, was du tun musst: dich freuen, dich schick machen
-                        und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
-                    </p>
+                        <p>
+                            Alles, was du tun musst: dich freuen, dich schick machen
+                            und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
+                        </p>
+                    </div>
 
                     <div class="back-footer">
                         <em>Ich freu mich auf diesen Abend mit dir. Immer.</em>
@@ -483,7 +505,7 @@
         if (!card) return;
 
         card.addEventListener("click", function () {
-            card.classList.toggle("is-flipped");
+            card.classList.toggle("show-back");
         });
     });
 </script>
