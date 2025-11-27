@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Night</title>
+<style>
+    :root {
+        --gold: #f5d6a4;
+        --gold-soft: rgba(245, 214, 164, 0.5);
+        --bg-dark: #050714;
+        --accent-rose: #c97986;
+        --accent-deep: #181b2f;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Georgia", "Times New Roman", serif;
+        background:
+            radial-gradient(circle at top, #313862 0, #050714 45%, #000 100%);
+        color: var(--gold);
+        overflow: hidden;
+    }
+
+    .scene {
+        position: relative;
+        padding: 24px;
+    }
+
+    /* dezente Lichtaura hinter der Karte */
+    .scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 420px;
+        height: 650px;
+        background:
+            radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
+        filter: blur(18px);
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    .card-container {
+        position: relative;
+        perspective: 1300px;
+        z-index: 1;
+    }
+
+    .card {
+        width: 320px;
+        height: 500px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+        cursor: pointer;
+        border-radius: 20px;
+        box-shadow:
+            0 18px 45px rgba(0, 0, 0, 0.85),
+            0 0 35px rgba(245, 214, 164, 0.18);
+        transform-origin: center center;
+        overflow: hidden;
+    }
+
+    .card.is-flipped {
+        transform: rotateY(180deg);
+    }
+
+    /* leicht „atmender“ Glow */
+    .card.breathing {
+        animation: breathing 6s ease-in-out infinite;
+    }
+
+    @keyframes breathing {
+        0% {
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.85),
+                0 0 35px rgba(245, 214, 164, 0.18);
+        }
+        50% {
+            box-shadow:
+                0 20px 55px rgba(0, 0, 0, 0.9),
+                0 0 52px rgba(245, 214, 164, 0.28);
+        }
+        100% {
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.85),
+                0 0 35px rgba(245, 214, 164, 0.18);
+        }
+    }
+
+    .card:hover {
+        transform: translateY(-8px) scale(1.02) rotateX(4deg) rotateY(-2deg);
+    }
+
+    .side {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding: 26px 26px 22px;
+    }
+
+    /* Vorderseite */
+    .front {
+        background:
+            radial-gradient(circle at top, #3a426d 0, #181b2f 45%, #050714 100%);
+        position: relative;
+    }
+
+    /* Rückseite */
+    .back {
+        background:
+            radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
+        transform: rotateY(180deg);
+        position: relative;
+    }
+
+    /* goldener Rahmen */
+    .side::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 16px;
+        border: 1px solid rgba(245, 214, 164, 0.6);
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.04),
+            0 0 25px rgba(245, 214, 164, 0.15);
+        pointer-events: none;
+    }
+
+    /* Glanz-Schimmer */
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: -20%;
+        background: linear-gradient(
+            125deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(255, 255, 255, 0.22) 50%,
+            transparent 60%,
+            transparent 100%
+        );
+        opacity: 0;
+        transform: translateX(-80%);
+        pointer-events: none;
+    }
+
+    .card.shimmer::before {
+        animation: shimmer 1.6s ease-out forwards;
+    }
+
+    @keyframes shimmer {
+        0% {
+            opacity: 0;
+            transform: translateX(-80%);
+        }
+        15% {
+            opacity: 0.9;
+        }
+        65% {
+            opacity: 0.2;
+            transform: translateX(80%);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(120%);
+        }
+    }
+
+    /* kleine Sparkles */
+    .sparkles {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .sparkle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(245, 214, 164, 0.7);
+        opacity: 0;
+        animation: twinkle 6s ease-in-out infinite;
+    }
+
+    .sparkle:nth-child(1) { top: 12%; left: 18%; animation-delay: 0.5s; }
+    .sparkle:nth-child(2) { top: 24%; right: 16%; animation-delay: 1.2s; }
+    .sparkle:nth-child(3) { top: 58%; left: 26%; animation-delay: 2.0s; }
+    .sparkle:nth-child(4) { top: 72%; right: 22%; animation-delay: 3.1s; }
+    .sparkle:nth-child(5) { top: 40%; left: 50%; animation-delay: 4.0s; }
+
+    @keyframes twinkle {
+        0% { opacity: 0; transform: scale(0.6);}
+        20% { opacity: 1; transform: scale(1);}
+        40% { opacity: 0; transform: scale(0.6);}
+        100% { opacity: 0; }
+    }
+
+    /* Inhalt Vorderseite */
+    .front-header {
+        position: relative;
+        text-align: center;
+        margin-top: 6px;
+        margin-bottom: 12px;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(245, 214, 164, 0.5);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(245, 214, 164, 0.8);
+        background: linear-gradient(
+            90deg,
+            rgba(0,0,0,0.6),
+            rgba(245,214,164,0.06),
+            rgba(0,0,0,0.7)
+        );
+    }
+
+    .pill span.heart {
+        font-size: 0.8rem;
+        color: var(--accent-rose);
+    }
+
+    .front-title {
+        margin-top: 14px;
+        font-size: 1.4rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .front-subtitle {
+        margin-top: 6px;
+        font-size: 0.9rem;
+        color: rgba(245, 214, 164, 0.9);
+    }
+
+    .divider {
+        margin: 18px auto 16px;
+        width: 70%;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(245,214,164,0.8),
+            transparent
+        );
+        position: relative;
+    }
+
+    .divider::before {
+        content: "✶";
+        position: absolute;
+        top: -9px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: rgba(245, 214, 164, 0.9);
+        padding: 0 6px;
+        background: radial-gradient(circle at center, #181b2f 0, #050714 75%);
+    }
+
+    .front-main {
+        position: relative;
+        text-align: center;
+        padding: 4px 6px 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .front-place {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(245,214,164,0.78);
+    }
+
+    .front-restaurant {
+        font-size: 1.3rem;
+        letter-spacing: 0.28em;
+        text-indent: 0.28em;
+        text-transform: uppercase;
+        color: rgba(245, 214, 164, 0.98);
+    }
+
+    .front-line {
+        font-size: 0.82rem;
+        color: rgba(245,214,164,0.8);
+        margin-top: 4px;
+    }
+
+    .front-tagline {
+        margin-top: 10px;
+        font-size: 0.76rem;
+        color: rgba(245,214,164,0.75);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .front-footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 18px;
+        font-size: 0.78rem;
+        color: rgba(245,214,164,0.85);
+    }
+
+    .front-footer span.name {
+        font-weight: 600;
+        color: var(--accent-rose);
+    }
+
+    .monogram {
+        font-size: 0.9rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(245,214,164,0.75);
+    }
+
+    /* Inhalt Rückseite */
+    .back-header {
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+
+    .back-header h2 {
+        font-size: 1.05rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .back-subline {
+        margin-top: 6px;
+        font-size: 0.8rem;
+        color: rgba(245,214,164,0.82);
+    }
+
+    .back-content {
+        margin-top: 16px;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: rgba(245,214,164,0.9);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .back-content p {
+        margin-bottom: 4px;
+    }
+
+    .back-list {
+        margin-left: 14px;
+        margin-top: 4px;
+    }
+
+    .back-list li {
+        margin-bottom: 4px;
+    }
+
+    .back-footer {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: rgba(245,214,164,0.85);
+    }
+
+    .back-footer em {
+        color: var(--accent-rose);
+    }
+
+    .hint {
+        position: fixed;
+        bottom: 18px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.78rem;
+        color: rgba(245, 214, 164, 0.5);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        pointer-events: none;
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            width: 280px;
+            height: 440px;
+        }
+
+        .scene::before {
+            width: 360px;
+            height: 540px;
+        }
+
+        .front-title {
+            font-size: 1.25rem;
+        }
+
+        .front-restaurant {
+            font-size: 1.2rem;
+            letter-spacing: 0.26em;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="scene">
+    <div class="card-container">
+        <div class="card breathing" id="card">
+
+            <!-- Vorderseite -->
+            <div class="side front">
+                <div class="sparkles">
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                </div>
+
+                <div class="front-header">
+                    <div class="pill">
+                        <span class="heart">♥</span>
+                        <span>Gutschein</span>
+                    </div>
+                    <div class="front-title">Date Night</div>
+                    <div class="front-subtitle">für Julia</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="front-main">
+                    <div class="front-place">Restaurant Zeitlang · Bergson</div>
+                    <div class="front-restaurant">Bergson</div>
+                    <div class="front-line">Ein Abendessen im Kunstkraftwerk in Aubing.</div>
+                    <div class="front-tagline">Nur wir zwei · heute Abend</div>
+                </div>
+
+                <div class="front-footer">
+                    <div>
+                        Mit Liebe,<br>
+                        <span class="name">Benjamin</span>
+                    </div>
+                    <div class="monogram">B & J</div>
+                </div>
+            </div>
+
+            <!-- Rückseite -->
+            <div class="side back">
+                <div class="sparkles">
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>;
+                    <div class="sparkle"></div>
+                </div>
+
+                <div class="back-header">
+                    <h2>Date Night im Zeitlang</h2>
+                    <div class="back-subline">
+                        Ein Abend im Bergson Kunstkraftwerk nur für uns zwei.
+                    </div>
+                </div>
+
+                <div class="back-content">
+                    <p>
+                        Dieser Gutschein ist für heute Abend:
+                        Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert,
+                        hole dich zu Hause ab und wir fahren gemeinsam dorthin.
+                    </p>
+
+                    <ul class="back-list">
+                        <li>Gehobene Küche im Restaurant Zeitlang im Bergson.</li>
+                        <li>Ein Abend nur für uns zwei, ohne Termine, ohne Alltag.</li>                        
+                        <li>Wir genießen den Abend in Ruhe mit Zeit nur füreinander.</li>
+                    </ul>
+
+                    <p>
+                        Alles, was du tun musst: dich freuen, dich schick machen
+                        und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
+                    </p>
+
+                    <div class="back-footer">
+                        <em>Ich freu mich auf diesen Abend mit dir.</em>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="hint">Zum Umdrehen tippen</div>
+
+<script>
+    const card = document.getElementById("card");
+
+    card.addEventListener("click", function () {
+        card.classList.toggle("is-flipped");
+
+        // Schimmer bei jedem Flip neu starten
+        card.classList.remove("shimmer");
+        void card.offsetWidth;
+        card.classList.add("shimmer");
+    });
+</script>
+
+</body>
+</html>
