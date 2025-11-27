@@ -7,10 +7,8 @@
 <style>
     :root {
         --gold: #f5d6a4;
-        --gold-soft: rgba(245, 214, 164, 0.5);
         --bg-dark: #050714;
         --accent-rose: #c97986;
-        --accent-deep: #181b2f;
     }
 
     * {
@@ -26,8 +24,7 @@
         justify-content: center;
         align-items: center;
         font-family: "Georgia", "Times New Roman", serif;
-        background:
-            radial-gradient(circle at top, #313862 0, #050714 45%, #000 100%);
+        background: radial-gradient(circle at top, #313862 0, #050714 45%, #000 100%);
         color: var(--gold);
         overflow: hidden;
     }
@@ -37,7 +34,7 @@
         padding: 24px;
     }
 
-    /* dezente Lichtaura hinter der Karte */
+    /* Lichtaura hinter der Karte */
     .scene::before {
         content: "";
         position: absolute;
@@ -45,8 +42,7 @@
         margin: auto;
         width: 420px;
         height: 650px;
-        background:
-            radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
+        background: radial-gradient(circle, rgba(245, 214, 164, 0.25), transparent 65%);
         filter: blur(18px);
         opacity: 0.9;
         pointer-events: none;
@@ -77,7 +73,7 @@
         transform: rotateY(180deg);
     }
 
-    /* leicht „atmender“ Glow */
+    /* atmender Glow */
     .card.breathing {
         animation: breathing 6s ease-in-out infinite;
     }
@@ -116,15 +112,13 @@
 
     /* Vorderseite */
     .front {
-        background:
-            radial-gradient(circle at top, #3a426d 0, #181b2f 45%, #050714 100%);
+        background: radial-gradient(circle at top, #3a426d 0, #181b2f 45%, #050714 100%);
         position: relative;
     }
 
     /* Rückseite */
     .back {
-        background:
-            radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
+        background: radial-gradient(circle at top, #2a1c33 0, #140b18 40%, #050714 100%);
         transform: rotateY(180deg);
         position: relative;
     }
@@ -213,7 +207,15 @@
         100% { opacity: 0; }
     }
 
-    /* „Logo“ – stilisierter Kreis mit B */
+    /* Logo-Zeile */
+    .logo-row {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
     .logo-mark {
         width: 42px;
         height: 42px;
@@ -230,19 +232,33 @@
         box-shadow: 0 0 14px rgba(245,214,164,0.35);
     }
 
-    .logo-text {
-        font-size: 0.62rem;
-        letter-spacing: 0.28em;
+    .logo-text-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo-text-main {
+        font-size: 0.9rem;
+        letter-spacing: 0.32em;
         text-transform: uppercase;
-        color: rgba(245,214,164,0.78);
-        margin-top: 6px;
+        text-indent: 0.32em;
+        color: rgba(245,214,164,0.95);
+    }
+
+    .logo-text-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: lowercase;
+        color: rgba(245,214,164,0.75);
+        margin-top: 2px;
     }
 
     /* Inhalt Vorderseite */
     .front-header {
         position: relative;
         text-align: center;
-        margin-top: 6px;
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
@@ -263,6 +279,7 @@
             rgba(245,214,164,0.06),
             rgba(0,0,0,0.7)
         );
+        margin-top: 10px;
     }
 
     .pill span.heart {
@@ -373,24 +390,12 @@
     /* Inhalt Rückseite */
     .back-header {
         text-align: center;
-        margin-top: 6px;
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
-    .back-header h2 {
-        font-size: 1.05rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-    }
-
-    .back-subline {
-        margin-top: 4px;
-        font-size: 0.8rem;
-        color: rgba(245,214,164,0.82);
-    }
-
     .back-content {
-        margin-top: 16px;
+        margin-top: 12px;
         font-size: 0.82rem;
         line-height: 1.5;
         color: rgba(245,214,164,0.9);
@@ -398,10 +403,6 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-    }
-
-    .back-content p {
-        margin-bottom: 4px;
     }
 
     .back-list {
@@ -474,23 +475,25 @@
                 </div>
 
                 <div class="front-header">
-                    <div class="logo-mark">B</div>
-                    <div class="logo-text">Bergson</div>
-
-                    <div style="margin-top: 12px;">
-                        <div class="pill">
-                            <span class="heart">♥</span>
-                            <span>Gutschein</span>
+                    <div class="logo-row">
+                        <div class="logo-mark">B</div>
+                        <div class="logo-text-block">
+                            <div class="logo-text-main">ERGSON</div>
+                            <div class="logo-text-sub">kunstkraftwerk</div>
                         </div>
-                        <div class="front-title">Date Night</div>
-                        <div class="front-subtitle">für Julia</div>
                     </div>
+
+                    <div class="pill">
+                        <span class="heart">♥</span>
+                        <span>Gutschein</span>
+                    </div>
+                    <div class="front-title">Date Night</div>
+                    <div class="front-subtitle">für Julia</div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="front-main">
-                    <!-- hier KEIN „Bergson“ doppelt, nur unten groß -->
                     <div class="front-place">Restaurant Zeitlang</div>
                     <div class="front-restaurant">Bergson</div>
                     <div class="front-line">Ein Abendessen im Kunstkraftwerk in Aubing.</div>
@@ -517,12 +520,15 @@
                 </div>
 
                 <div class="back-header">
-                    <div class="logo-mark">B</div>
-                    <div class="logo-text">Bergson · Zeitlang</div>
-
-                    <h2>Date Night im Zeitlang</h2>
-                    <div class="back-subline">
-                        Ein Abend im Bergson Kunstkraftwerk – nur für uns zwei.
+                    <div class="logo-row">
+                        <div class="logo-mark">B</div>
+                        <div class="logo-text-block">
+                            <div class="logo-text-main">ERGSON</div>
+                            <div class="logo-text-sub">kunstkraftwerk</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;">
+                        Date Night im Zeitlang
                     </div>
                 </div>
 
