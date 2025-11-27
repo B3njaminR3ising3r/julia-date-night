@@ -183,34 +183,38 @@
     }
 
     /* Vorderseite */
+    .front-header {
+        margin-bottom: 12px;
+    }
+
     .pill-wrapper {
         text-align: center;
-        margin-top: 24px;
+        margin-top: 28px;
     }
 
     .pill {
-        padding: 6px 16px;
+        padding: 8px 20px;
         border-radius: 999px;
         border: 1px solid rgba(245,214,164,0.5);
-        font-size: .78rem;
-        letter-spacing: .15em;
+        font-size: .9rem;
+        letter-spacing: .18em;
         text-transform: uppercase;
         background: rgba(0,0,0,0.45);
     }
 
     .title-block {
         text-align: center;
-        margin-top: 16px;
+        margin-top: 20px;
     }
 
     .front-title {
-        font-size: 1.6rem;
-        letter-spacing: .1em;
+        font-size: 1.8rem;
+        letter-spacing: .12em;
         text-transform: uppercase;
     }
 
     .divider {
-        margin: 30px auto 24px;
+        margin: 32px auto 26px;
         width: 70%;
         height: 1px;
         background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -225,13 +229,13 @@
         transform: translateX(-50%);
         background: #181b2f;
         padding: 0 6px;
-        font-size: .8rem;
+        font-size: .85rem;
         color: var(--gold);
     }
 
     .front-main {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -251,10 +255,61 @@
         color: rgba(245,214,164,0.9);
     }
 
+    /* Adventskalender-Türchen */
+    .front-illustration {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .advent-door {
+        width: 110px;
+        height: 130px;
+        border-radius: 10px;
+        border: 1px solid rgba(245,214,164,0.7);
+        box-shadow:
+            0 0 18px rgba(0,0,0,0.7),
+            0 0 18px rgba(245,214,164,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, rgba(245,214,164,0.16), transparent 70%);
+        position: relative;
+    }
+
+    .advent-door-inner {
+        width: 82%;
+        height: 82%;
+        border-radius: 8px;
+        border: 1px solid rgba(245,214,164,0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(5,7,20,0.9), rgba(45,35,70,0.95));
+    }
+
+    .advent-door-number {
+        font-size: 1.6rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+    }
+
+    .advent-door-handle {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(245,214,164,0.85);
+        box-shadow: 0 0 6px rgba(245,214,164,0.8);
+    }
+
     .front-footer {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
+        margin-top: 22px;
         font-size: .8rem;
     }
 
@@ -269,6 +324,10 @@
     }
 
     /* Rückseite */
+    .back-header {
+        margin-bottom: 12px;
+    }
+
     .back-header-title {
         text-align: center;
         margin-top: 22px;
@@ -284,6 +343,7 @@
         gap: 14px;
         font-size: .84rem;
         line-height: 1.5;
+        flex: 1;
     }
 
     .underline {
@@ -294,8 +354,13 @@
         margin-left: 16px;
     }
 
+    .back-list li {
+        margin-bottom: 4px;
+    }
+
     .back-footer {
-        margin-top: 10px;
+        margin-top: auto;
+        text-align: center;
         font-size: .82rem;
     }
 
@@ -354,6 +419,15 @@
                 <div class="front-main">
                     <div class="front-line-big">HEUTE ABEND GIBT ES NUR UNS ZWEI</div>
                     <div class="front-line-small">Ein Abendessen im RESTAURANT ZEITLANG.</div>
+
+                    <div class="front-illustration">
+                        <div class="advent-door">
+                            <div class="advent-door-inner">
+                                <span class="advent-door-number">★</span>
+                            </div>
+                            <div class="advent-door-handle"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="front-footer">
@@ -388,7 +462,10 @@
 
                     <p class="underline">Dieser Gutschein ist für heute Abend</p>
 
-                    <p>Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert, hole dich zu Hause ab und wir fahren gemeinsam dorthin.</p>
+                    <p>
+                        Ich habe einen Tisch im Restaurant Zeitlang im Bergson reserviert,
+                        hole dich zu Hause ab und wir fahren gemeinsam dorthin.
+                    </p>
 
                     <ul class="back-list">
                         <li>Ein Abend nur für uns zwei ohne Alltag.</li>
@@ -396,7 +473,8 @@
                     </ul>
 
                     <p>
-                        Alles, was du tun musst: dich freuen, dich schick machen und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
+                        Alles, was du tun musst: dich freuen, dich schick machen
+                        und heute Abend mit mir einen kleinen Ausbruch aus dem Alltag genießen.
                     </p>
 
                     <div class="back-footer">
